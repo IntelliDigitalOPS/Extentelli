@@ -64,12 +64,12 @@ public class Cuboid {
 			b.setType((rand.nextInt(Math.round(percent/100F))==0)?type:b.getType());
 	}
 	public boolean contains(Location loc) {
-		return getLocArray().contains(loc)?true:false;
+		return getLocArray().contains(loc);
 	}
 	public boolean contains(Block block) {
-		return getBlockArray().contains(block)?true:false;
+		return getBlockArray().contains(block);
 	}
 	public boolean contains(Entity e) {
-		return getLocArray().contains(e.getLocation())?true:false;
+		return getLocArray().contains(e.getLocation());
 	}
 }
