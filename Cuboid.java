@@ -19,11 +19,11 @@ public class Cuboid {
 	private Random rand = new Random();
 	
 	int xMax;
-    int xMin;
-    int yMax;
-    int yMin;
-    int zMax;
-    int zMin;
+	int xMin;
+	int yMax;
+	int yMin;
+	int zMax;
+	int zMin;
 	
 	public Cuboid(Location corner1, Location corner2) {
 		this.cornerA = Preconditions.checkNotNull(corner1, "Illegal argument, corner cannot be null");
@@ -32,11 +32,11 @@ public class Cuboid {
 				"Illegal Argument, corner locations do not exist in the same world");
 		
 		xMax = Integer.max(cornerA.getBlockX(), cornerB.getBlockX());
-	    xMin = Integer.min(cornerA.getBlockX(), cornerB.getBlockX());
-	    yMax = Integer.max(cornerA.getBlockY(), cornerB.getBlockY());
-	    yMin = Integer.min(cornerA.getBlockY(), cornerB.getBlockY());
-	    zMax = Integer.max(cornerA.getBlockZ(), cornerB.getBlockZ());
-	    zMin = Integer.min(cornerA.getBlockZ(), cornerB.getBlockZ());
+		xMin = Integer.min(cornerA.getBlockX(), cornerB.getBlockX());
+		yMax = Integer.max(cornerA.getBlockY(), cornerB.getBlockY());
+		yMin = Integer.min(cornerA.getBlockY(), cornerB.getBlockY());
+		zMax = Integer.max(cornerA.getBlockZ(), cornerB.getBlockZ());
+		zMin = Integer.min(cornerA.getBlockZ(), cornerB.getBlockZ());
 	}
 	public Location[] getCorners() {
 		return new Location[] {cornerA, cornerB};
