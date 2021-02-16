@@ -18,23 +18,31 @@ public class Cuboid {
 	private Location cornerB;
 	private Random rand = new Random();
 	
+	int xMax;
+    int xMin;
+    int yMax;
+    int yMin;
+    int zMax;
+    int zMin;
+	
 	public Cuboid(Location corner1, Location corner2) {
 		this.cornerA = Preconditions.checkNotNull(corner1, "Illegal argument, corner cannot be null");
 		this.cornerB = Preconditions.checkNotNull(corner2, "Illegal argument, corner cannot be null");
 		Preconditions.checkArgument(corner1.getWorld()==corner2.getWorld(),
 				"Illegal Argument, corner locations do not exist in the same world");
+		
+		xMax = Integer.max(cornerA.getBlockX(), cornerB.getBlockX());
+	    xMin = Integer.min(cornerA.getBlockX(), cornerB.getBlockX());
+	    yMax = Integer.max(cornerA.getBlockY(), cornerB.getBlockY());
+	    yMin = Integer.min(cornerA.getBlockY(), cornerB.getBlockY());
+	    zMax = Integer.max(cornerA.getBlockZ(), cornerB.getBlockZ());
+	    zMin = Integer.min(cornerA.getBlockZ(), cornerB.getBlockZ());
 	}
 	public Location[] getCorners() {
 		return new Location[] {cornerA, cornerB};
 	}
 	public ArrayList<Location> getLocArray(){
 		ArrayList<Location> locs = new ArrayList<Location>();
-		int xMax = Integer.max(cornerA.getBlockX(), cornerB.getBlockX());
-	    int xMin = Integer.min(cornerA.getBlockX(), cornerB.getBlockX());
-	    int yMax = Integer.max(cornerA.getBlockY(), cornerB.getBlockY());
-	    int yMin = Integer.min(cornerA.getBlockY(), cornerB.getBlockY());
-	    int zMax = Integer.max(cornerA.getBlockZ(), cornerB.getBlockZ());
-	    int zMin = Integer.min(cornerA.getBlockZ(), cornerB.getBlockZ());
 	    for (int x = xMin; x <= xMax; x++)
 	        for (int y = yMin; y <= yMax; y++)
 	            for (int z = zMin; z <= zMax; z++)
@@ -43,17 +51,38 @@ public class Cuboid {
 	}
 	public ArrayList<Block> getBlockArray(){
 		ArrayList<Block> blocks = new ArrayList<Block>();
-		int xMax = Integer.max(cornerA.getBlockX(), cornerB.getBlockX());
-	    int xMin = Integer.min(cornerA.getBlockX(), cornerB.getBlockX());
-	    int yMax = Integer.max(cornerA.getBlockY(), cornerB.getBlockY());
-	    int yMin = Integer.min(cornerA.getBlockY(), cornerB.getBlockY());
-	    int zMax = Integer.max(cornerA.getBlockZ(), cornerB.getBlockZ());
-	    int zMin = Integer.min(cornerA.getBlockZ(), cornerB.getBlockZ());
 	    for (int x = xMin; x <= xMax; x++)
 	        for (int y = yMin; y <= yMax; y++)
 	            for (int z = zMin; z <= zMax; z++)
 	            	blocks.add(cornerA.getWorld().getBlockAt(x, y, z));
 	    return blocks;
+	}
+	public void setCorners(Location corner1, Location corner2) {
+		this.cornerA = Preconditions.checkNotNull(corner1, "Illegal argument, corner cannot be null");
+		this.cornerB = Preconditions.checkNotNull(corner2, "Illegal argument, corner cannot be null");
+		Preconditions.checkArgument(corner1.getWorld()==corner2.getWorld(),
+				"Illegal Argument, corner locations do not exist in the same world");
+	}
+	public Location getCenter() {
+        return new Location(cornerA.getWorld(),(xMax-xMin)/2+xMin,(yMax-yMin)/2+yMin,(zMax-zMin)/2+zMin);
+    }
+	public double getDistanceCorners() {
+		return cornerA.distance(cornerB);
+	}
+	public double getDistanceCornersSquared() {
+		return cornerA.distanceSquared(cornerB);
+	}
+	public int getHeight() {
+        return yMax-yMin+1;
+    }
+	public int getXWidth() {
+        return xMax-xMin+1;
+    }
+	public int getZWidth() {
+        return zMax-zMin+1;
+    }
+	public int getTotalBlocks() {
+		return getHeight()*getXWidth()*getZWidth();
 	}
 	public void setType(Material type) {
 		for(Block b:getBlockArray())
