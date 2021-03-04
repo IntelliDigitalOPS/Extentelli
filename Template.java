@@ -24,6 +24,7 @@ public class ClassName extends JavaPlugin implements Listener, CommandExecutor, 
 	
 	@Override
 	public void onEnable() {
+		this.getCommand("commandname").setTabCompleter(this);
 		System.out.println("Started");
 		//Startup Logic
 	}
