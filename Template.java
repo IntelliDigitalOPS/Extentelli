@@ -25,10 +25,12 @@ public class ClassName extends JavaPlugin implements Listener, CommandExecutor, 
 	@Override
 	public void onEnable() {
 		System.out.println("Started");
+		//Startup Logic
 	}
 	@Override
 	public void onDisable() {
 		System.out.println("Stopped");
+		//Stop Logic
 	}
 	private static final String[] COMMANDS = {"start", "stop", "changethis"};//Change to match args
 	@Override
