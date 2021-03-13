@@ -5,6 +5,9 @@ import java.util.HashMap;
 import com.google.common.base.Preconditions;
 
 public class BidirectionalPairMap<E> {
+	
+	//By @Intelli -> https://github.com/IntelliDigitalOPS
+	
 	private HashMap<E, E> a = new HashMap<>();
 	private HashMap<E, E> b = new HashMap<>();
 	
